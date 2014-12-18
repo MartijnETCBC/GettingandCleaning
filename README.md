@@ -8,16 +8,16 @@ If this is done the following things are done (first for the test set, then same
 
 *lines 17-18: activity code is added to the dataset.
 
-lines 20-21: number of the volunteer is added with the header 'subject'.
+*lines 20-21: number of the volunteer is added with the header 'subject'.
 
 *lines 25-32 the same is done for the train set.
 
 
-lines 35: merging of test set and train set.
+*lines 35: merging of test set and train set.
 
-lines 38-47: column with intuitive description of the activity (walking, sitting etc.) is added, column with activity number is removed.
+*lines 38-47: column with intuitive description of the activity (walking, sitting etc.) is added, column with activity number is removed.
 
-lines 50-54: calculates the mean for each subject and each activity: 6 activities x 30 subjects = 180 rows for each variable.
+*lines 50-54: calculates the mean for each subject and each activity: 6 activities x 30 subjects = 180 rows for each variable.
 
 
 ##Code Book
