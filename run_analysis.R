@@ -1,26 +1,33 @@
-#data testset
+#import the data
 datatest <- read.table("c:/users/martijn/documents/CourseraDataScience/GettingandCleaning/data_UCI_HAR/test/X_test.txt", header = FALSE)
 features <- read.table("c:/users/martijn/documents/CourseraDataScience/GettingandCleaning/data_UCI_HAR/features.txt", header = FALSE)
+activecodetest <- read.table("c:/users/martijn/documents/CourseraDataScience/GettingandCleaning/data_UCI_HAR/test/y_test.txt", header = FALSE)
+subtest <- read.table("c:/users/martijn/documents/CourseraDataScience/GettingandCleaning/data_UCI_HAR/test/subject_test.txt", header = FALSE)
+datatrain <- read.table("c:/users/martijn/documents/CourseraDataScience/GettingandCleaning/data_UCI_HAR/train/X_train.txt", header = FALSE)
+activecodetrain <- read.table("c:/users/martijn/documents/CourseraDataScience/GettingandCleaning/data_UCI_HAR/train/y_train.txt", header = FALSE)
+subtrain <- read.table("c:/users/martijn/documents/CourseraDataScience/GettingandCleaning/data_UCI_HAR/train/subject_train.txt", header = FALSE)
+
+#manip of feature names
 betfeat <- gsub('\\(','',features[,2])
 betfeat2 <- gsub('\\)','',betfeat)
 betfeat3 <- gsub('-','_',betfeat2)
 colnames(datatest) <- betfeat3
+#test dataset
 totdatselecttest <- datatest[,grep('mean|std',colnames(datatest))]
-activecodetest <- read.table("c:/users/martijn/documents/CourseraDataScience/GettingandCleaning/data_UCI_HAR/test/y_test.txt", header = FALSE)
+
 newsettest <- cbind(activecodetest, totdatselecttest)
 colnames(newsettest)[1] <- 'act_code'
-subtest <- read.table("c:/users/martijn/documents/CourseraDataScience/GettingandCleaning/data_UCI_HAR/test/subject_test.txt", header = FALSE)
+
 newersettest <- cbind(subtest, newsettest)
 colnames(newersettest)[1] <- 'subject'
 
-# data train set
-datatrain <- read.table("c:/users/martijn/documents/CourseraDataScience/GettingandCleaning/data_UCI_HAR/train/X_train.txt", header = FALSE)
+#train dataset
 colnames(datatrain) <- betfeat3
 totdatselecttrain <- datatrain[,grep('mean|std',colnames(datatrain))]
-activecodetrain <- read.table("c:/users/martijn/documents/CourseraDataScience/GettingandCleaning/data_UCI_HAR/train/y_train.txt", header = FALSE)
+
 newsettrain <- cbind(activecodetrain, totdatselecttrain)
 colnames(newsettrain)[1] <- 'act_code'
-subtrain <- read.table("c:/users/martijn/documents/CourseraDataScience/GettingandCleaning/data_UCI_HAR/train/subject_train.txt", header = FALSE)
+
 newersettrain <- cbind(subtrain, newsettrain)
 colnames(newersettrain)[1] <- 'subject'
 
@@ -34,10 +41,7 @@ totdat$activity[totdat$act_code == 3] <- "walking_downstairs"
 totdat$activity[totdat$act_code == 4] <- "sitting"
 totdat$activity[totdat$act_code == 5] <- "standing"
 totdat$activity[totdat$act_code == 6] <- "laying"
-
 totdat$act_code <- NULL
-
-#brings activity to the front
 totdat2 <- cbind(totdat$activity, totdat)
 totdat2[,82] <- NULL
 colnames(totdat2)[1] <- 'activity'
